@@ -47,7 +47,7 @@ for (int i=0;i<2;i++) {
 
 if (offsetx>0.f) {
   startx = startx + offsetx;
-  if (startx>10.f) {
+  if (startx>30.f) {
     offsetx = -offsetx;
     }
   }
@@ -128,16 +128,17 @@ for (i=0;i<probot->number_third_color_sections;i++) {
   }
 
 {
-  Rectangle rme = {.x=8,.y=1,.width=3,.height=3};
+  Rectangle rme = {.x=9,.y=2,.width=3,.height=3};
   Rectangle r;
   r.x =    ((float)(rme.x) + x_offset) * x_scale;
   r.y =    ((float)(rme.y) + y_offset) * y_scale;
   r.width = ((float)rme.width) * x_scale;
   r.height = ((float)rme.height) * y_scale;
   DrawCircle(r.x,r.y,(1.333f * y_scale),WHITE);
-  r.x =    ((float)(-8) + x_offset) * x_scale;
+  r.x =    ((float)(-9) + x_offset) * x_scale;
   DrawCircle(r.x,r.y,(1.333f * y_scale),WHITE);  
   }
+
 
 }
 
@@ -150,7 +151,7 @@ BeginDrawing();
 
 ClearBackground(BLACK);
 
-for (int i=0;i<2;i++) {
+for (int i=0;i<4;i++) {
   larry_harvey_basketball_team *team = league->teams+i;
   for (int j=0;j<5;j++) {
     larry_harvey_robot *probot = team->players+j;

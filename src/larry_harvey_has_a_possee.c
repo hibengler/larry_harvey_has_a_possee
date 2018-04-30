@@ -89,6 +89,7 @@ probot->second_sections = NULL;
     XXXXXXXXXX   
   XXXX  XX  XXXX
     XXXXXXXXXX
+    XXXXXXXXXX
       XX  XX  
           
 */	 
@@ -178,8 +179,8 @@ probot->second_sections[2].the_section = (Rectangle) {.x=3,.y=15,.width=6,.heigh
     XXXXXXXXXX        XXXXXXXXXX      XXXXXXXXXX        XXXXXXXXXX      XXXXXXXXXX       
   XXXX  XX  XXXX      XX  XX  XX    XXXX  XX  XXXX      XX  XX  XX    XXXX  XX  XXXX
     XXXXXXXXXX        XXXXXXXXXX      XXXXXXXXXX        XXXXXXXXXX    XXXXXXXXXXXXXX
-    XXXXXXXXXX          XX  XX          XX  XX          XXXX  XXXX      XX222222XX
-      XX  XX          XX      XX                        XX      XX      XX22  22XX
+    XXXXXXXXXX          XX  XX        XXXXXXXXXX        XXXX  XXXX      XX222222XX
+      XX  XX          XX      XX        XX  XX          XX      XX      XX22  22XX
 
    EVIL EVIL EVIL EVIL EVIL EVIL EVIL team (dark red) EVIL EVIL EVIL EVIL EVIL EVIL EVIL */
 void init_larry_harvey_evil(larry_harvey_basketball_team *pteam) {
@@ -386,11 +387,348 @@ init_larry_harvey_love_power_forward(pteam->players+4);
 
 /* BURNER BURNER BURNER BURNER BURNER BURNER BURNER team (light orange) BURNER BURNER BURNER BURNER BURNER BURNER BURNER */
 
-void init_larry_harvey_burner(larry_harvey_basketball_team *pteam) {}
+void init_larry_harvey_burner_standard(larry_harvey_robot *probot) {
+probot->usual_first_color  = CLITERAL{255,147,25,255};   	// Orange fire
+probot->usual_second_color = CLITERAL{0,0,0,0};         	// No second color
+probot->usual_third_color  = CLITERAL{0,0,0,0};       		// No third color
+probot->number_second_color_sections = 0;			// No second color for burner
+probot->second_sections = NULL;
+probot->number_third_color_sections = 0;			// Only goa has 3 colors.
+probot->third_sections = NULL;
+}
 
 
 
-void init_larry_harvey_star(larry_harvey_basketball_team *pteam) {}
+/*
+      XXXXXX
+    XXXXXXXXXX   
+    XX  XX  XX
+    XXXXXXXXXX
+    XXXXXXXXXX
+    XX  XX  XX  
+*/	 
+void init_larry_harvey_burner_point_guard(larry_harvey_robot *probot) {
+init_larry_harvey_burner_standard(probot);
+probot->number_first_color_sections = 5;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=24};// base
+probot->first_sections[1].the_section = (Rectangle) {.x=-9,.y=-15,.width=18,.height=6};  // noggin
+probot->first_sections[2].the_section = (Rectangle) {.x=-15,.y=15,.width=6,.height=6};   // left foot
+probot->first_sections[3].the_section = (Rectangle) {.x=9,.y=15,.width=6,.height=6};   	// right foot
+probot->first_sections[4].the_section = (Rectangle) {.x=-3,.y=15,.width=6,.height=6};  	// uh middle foot?
+}
+
+
+
+/*  
+        XX  
+    XX  XX  XX  
+    XXXXXXXXXX   
+    XX  XX  XX
+    XXXXXXXXXX
+      XX  XX  
+      XX  XX  
+          
+*/
+void init_larry_harvey_burner_shooting_guard(larry_harvey_robot *probot) {
+init_larry_harvey_burner_standard(probot);
+probot->number_first_color_sections = 6;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=18};// each block is a 54x54 square with 6 pixels not used.
+probot->first_sections[1].the_section = (Rectangle) {.x=-15,.y=-15,.width=6,.height=6}; // left ear
+probot->first_sections[2].the_section = (Rectangle) {.x=9,.y=-15,.width=6,.height=6};   // right ear
+probot->first_sections[3].the_section = (Rectangle) {.x=-3,.y=-21,.width=6,.height=12};  // top horn
+probot->first_sections[4].the_section = (Rectangle) {.x=-9,.y=9,.width=6,.height=12};   // left foot
+probot->first_sections[5].the_section = (Rectangle) {.x=3,.y=9,.width=6,.height=12};   	// right foot
+
+}
+
+
+/*
+
+
+    XXXXXXXXXX   
+XXXXXX  XX  XXXXXX
+  XXXXXXXXXXXXXX
+    XXXXXXXXXX
+      XX  XX  
+*/	 
+void init_larry_harvey_burner_center(larry_harvey_robot *probot) {
+init_larry_harvey_burner_standard(probot);
+probot->number_first_color_sections = 7;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=24}; // Main chunk
+probot->first_sections[1].the_section = (Rectangle) {.x=-27,.y=-3,.width=12,.height=6};  // left arm
+probot->first_sections[2].the_section = (Rectangle) {.x=15,.y=-3,.width=12,.height=6};   // right arm
+probot->first_sections[3].the_section = (Rectangle) {.x=-21,.y=3,.width=6,.height=6};    // left arm2
+probot->first_sections[4].the_section = (Rectangle) {.x=15,.y=3,.width=6,.height=6};     // right arm2
+probot->first_sections[5].the_section = (Rectangle) {.x=-9,.y=15,.width=6,.height=6};    // left foot
+probot->first_sections[6].the_section = (Rectangle) {.x=3,.y=15,.width=6,.height=6};     // right foot
+
+}
+
+
+
+/*
+        XX    
+    XXXXXXXXXX   
+  XXXX  XX  XXXX
+    XXXXXXXXXX
+    XXXX  XXXX
+      XX  XX  
+*/	 
+void init_larry_harvey_burner_small_forward(larry_harvey_robot *probot) {
+init_larry_harvey_burner_standard(probot);
+probot->number_first_color_sections = 8;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=18};// each block is a 54x54 square with 6 pixels not used.
+probot->first_sections[1].the_section = (Rectangle) {.x=-21,.y=-3,.width=6,.height=6};  // left arm
+probot->first_sections[2].the_section = (Rectangle) {.x=15,.y=-3,.width=6,.height=6};  // right arm
+probot->first_sections[3].the_section = (Rectangle) {.x=-3,.y=-15,.width=6,.height=6};  // top noogie
+probot->first_sections[4].the_section = (Rectangle) {.x=-9,.y=15,.width=6,.height=6};   // left foot
+probot->first_sections[5].the_section = (Rectangle) {.x=3,.y=15,.width=6,.height=6};   	// right foot
+probot->first_sections[6].the_section = (Rectangle) {.x=-15,.y=9,.width=12,.height=6};   // left foot2
+probot->first_sections[7].the_section = (Rectangle) {.x=3,.y=9,.width=12,.height=6};   	// right foot2
+
+}
+
+
+/*  
+        XX      
+      XXXXXX  
+    XXXXXXXXXX   
+    XX  XX  XX
+    XXXXXXXXXX
+      XX  XX  
+    XX      XX
+*/	 
+void init_larry_harvey_burner_power_forward(larry_harvey_robot *probot) {
+init_larry_harvey_burner_standard(probot);
+probot->number_first_color_sections = 9;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=18};// each block is a 54x54 square with 6 pixels not used.
+probot->first_sections[1].the_section = (Rectangle) {.x=-9,.y=-15,.width=18,.height=6};  // nub 1
+probot->first_sections[2].the_section = (Rectangle) {.x=-3,.y=-21,.width=6,.height=6};  // nub 2
+probot->first_sections[5].the_section = (Rectangle) {.x=-9,.y=9,.width=6,.height=6};   // left foot
+probot->first_sections[6].the_section = (Rectangle) {.x=3,.y=9,.width=6,.height=6};   	// right foot
+probot->first_sections[7].the_section = (Rectangle) {.x=-15,.y=15,.width=6,.height=6};  // left pointantennae
+probot->first_sections[8].the_section = (Rectangle) {.x=9,.y=15,.width=6,.height=6};   	// right pointantennae
+
+}
+
+
+/* BURNER BURNER BURNER BURNER BURNER BURNER BURNER team (light orange) BURNER BURNER BURNER BURNER BURNER BURNER BURNER 
+                      XX                                                XX
+      XXXXXX      XX  XX  XX                            XX            XXXXXX
+    XXXXXXXXXX    XXXXXXXXXX      XXXXXXXXXX        XXXXXXXXXX      XXXXXXXXXX
+    XX  XX  XX    XX  XX  XX  XXXXXX  XX  XXXXXX  XXXX  XX  XXXX    XX  XX  XX
+    XXXXXXXXXX    XXXXXXXXXX    XXXXXXXXXXXXXX      XXXXXXXXXX      XXXXXXXXXX
+    XXXXXXXXXX      XX  XX        XXXXXXXXXX        XXXX  XXXX        XX  XX
+    XX  XX  XX      XX  XX          XX  XX            XX  XX        XX      XX
+   BURNER BURNER BURNER BURNER BURNER BURNER BURNER team (light orange) BURNER BURNER BURNER BURNER BURNER BURNER BURNER */
+
+void init_larry_harvey_burner(larry_harvey_basketball_team *pteam) {
+init_larry_harvey_burner_point_guard(pteam->players+0);
+init_larry_harvey_burner_shooting_guard(pteam->players+1);
+init_larry_harvey_burner_center(pteam->players+2);
+init_larry_harvey_burner_small_forward(pteam->players+3);
+init_larry_harvey_burner_power_forward(pteam->players+4);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* STAR STAR STAR STAR STAR STAR STAR team (yellow) STAR STAR STAR STAR STAR STAR STAR */
+
+void init_larry_harvey_star_standard(larry_harvey_robot *probot) {
+probot->usual_first_color  = CLITERAL{255,251,19,255};   	// yellow
+probot->usual_second_color = CLITERAL{179,144,106,255};         // Tan pants
+probot->usual_third_color  = CLITERAL{0,0,0,0};       		// No third color
+
+probot->number_third_color_sections = 0;			// Only goa has 3 colors.
+probot->third_sections = NULL;
+}
+
+
+
+/*
+    XX      XX
+      XXXXXX
+    XXXXXXXXXX   
+  XXXX  XX  XXXX
+    XXXXXXXXXX
+    XXXXXXXXXXXXXX
+
+*/	 
+void init_larry_harvey_star_point_guard(larry_harvey_robot *probot) {
+init_larry_harvey_star_standard(probot);
+probot->number_first_color_sections = 7;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=24};// base
+probot->first_sections[1].the_section = (Rectangle) {.x=-9,.y=-15,.width=18,.height=6};  // noggin
+probot->first_sections[2].the_section = (Rectangle) {.x=-15,.y=-21,.width=6,.height=6};  // left earthing
+probot->first_sections[3].the_section = (Rectangle) {.x=9,.y=-21,.width=6,.height=6};    // right earthing
+probot->first_sections[4].the_section = (Rectangle) {.x=15,.y=9,.width=12,.height=6}; 	// one foot
+probot->first_sections[5].the_section = (Rectangle) {.x=-21,.y=-3,.width=6,.height=6};  // left arm
+probot->first_sections[6].the_section = (Rectangle) {.x=15,.y=-3,.width=6,.height=6};  // right arm
+
+probot->number_second_color_sections = 0;                       
+probot->second_sections = NULL;
+}
+
+
+/*
+
+
+    XXXXXXXXXX   
+XXXXXX  XX  XXXXXX
+  XXXXXXXXXXXXXX
+    XX222222XX
+    XX22  22XX
+*/	 
+void init_larry_harvey_star_shooting_guard(larry_harvey_robot *probot) {
+init_larry_harvey_star_standard(probot);
+probot->number_first_color_sections = 7;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=18}; // Main chunk
+probot->first_sections[1].the_section = (Rectangle) {.x=-27,.y=-3,.width=12,.height=6};  // left arm
+probot->first_sections[2].the_section = (Rectangle) {.x=15,.y=-3,.width=12,.height=6};   // right arm
+probot->first_sections[3].the_section = (Rectangle) {.x=-15,.y=-3,.width=6,.height=6};  // left arm2
+probot->first_sections[4].the_section = (Rectangle) {.x=15,.y=-3,.width=6,.height=6};   // right arm2
+probot->first_sections[5].the_section = (Rectangle) {.x=-15,.y=9,.width=6,.height=12};    // left foot
+probot->first_sections[6].the_section = (Rectangle) {.x=9,.y=9,.width=6,.height=12};     // right foot
+
+probot->number_second_color_sections = 3;   
+probot->second_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_second_color_sections);
+probot->second_sections[0].the_section = (Rectangle) {.x=-9,.y=9,.width=18,.height=6};  // bottom pants bar
+probot->second_sections[1].the_section = (Rectangle) {.x=-9,.y=15,.width=6,.height=6};  // left pants leg
+probot->second_sections[2].the_section = (Rectangle) {.x=3,.y=15,.width=6,.height=6};   // right pants leg
+}
+
+
+
+
+
+/*
+          XX
+      XX^^^^    
+    XXXXXXXXXX   
+  XXXX  XX  XXXX
+    XXXXXXXXXX
+    XXXXXXXXXX
+      XX  XX  
+*/	 
+void init_larry_harvey_star_center(larry_harvey_robot *probot) {
+init_larry_harvey_star_standard(probot);
+probot->number_first_color_sections = 8;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=24};// each block is a 54x54 square with 6 pixels not used.
+probot->first_sections[1].the_section = (Rectangle) {.x=-21,.y=-3,.width=6,.height=6};  // left arm
+probot->first_sections[2].the_section = (Rectangle) {.x=15,.y=-3,.width=6,.height=6};  // right arm
+probot->first_sections[3].the_section = (Rectangle) {.x=-9,.y=-15,.width=6,.height=6};  // top noogie
+probot->first_sections[4].the_section = (Rectangle) {.x=-3,.y=-15,.width=12,.height=5};  // top noogie2
+probot->first_sections[5].the_section = (Rectangle) {.x=3,.y=-21,.width=6,.height=6};  // top noogie3
+probot->first_sections[6].the_section = (Rectangle) {.x=-9,.y=15,.width=6,.height=6};   // left foot
+probot->first_sections[7].the_section = (Rectangle) {.x=3,.y=15,.width=6,.height=6};   	// right foot
+
+probot->number_second_color_sections = 0;                       
+probot->second_sections = NULL;
+}
+
+
+
+/*
+      
+  XXXX      XXXX
+  XXXXXXXXXXXXXX
+    XX  XX  XX
+    XXXXXXXXXX
+    XXXXXXXXXX
+      XX  XX  
+*/	 
+void init_larry_harvey_star_small_forward(larry_harvey_robot *probot) {
+init_larry_harvey_star_standard(probot);
+
+probot->number_first_color_sections = 7;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=24};// each block is a 54x54 square with 6 pixels not used.
+probot->first_sections[1].the_section = (Rectangle) {.x=-21,.y=-9,.width=6,.height=6};  // left ear2
+probot->first_sections[2].the_section = (Rectangle) {.x=15,.y=-9,.width=6,.height=6};  // right ear2
+probot->first_sections[3].the_section = (Rectangle) {.x=-21,.y=-15,.width=12,.height=6};  // top ear
+probot->first_sections[4].the_section = (Rectangle) {.x=9,.y=-15,.width=12,.height=6};  // top ear
+probot->first_sections[5].the_section = (Rectangle) {.x=-9,.y=15,.width=6,.height=6};   // left foot
+probot->first_sections[6].the_section = (Rectangle) {.x=3,.y=15,.width=6,.height=6};   	// right foot
+
+probot->number_second_color_sections = 0;                       
+probot->second_sections = NULL;
+}
+
+
+/*
+    XX      XX
+    XXXX  XXXX    
+    XXXXXXXXXX   
+  XXXX  XX  XXXX
+    XXXXXXXXXX
+    XXXXXXXXXX
+      XX  XX  
+*/	 
+void init_larry_harvey_star_power_forward(larry_harvey_robot *probot) {
+init_larry_harvey_star_standard(probot);
+probot->number_first_color_sections = 9;
+probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
+probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=24};// each block is a 54x54 square with 6 pixels not used.
+probot->first_sections[1].the_section = (Rectangle) {.x=-21,.y=-3,.width=6,.height=6};  // left arm
+probot->first_sections[2].the_section = (Rectangle) {.x=15,.y=-3,.width=6,.height=6};  // right arm
+probot->first_sections[3].the_section = (Rectangle) {.x=-15,.y=-15,.width=12,.height=6};  // left ear1
+probot->first_sections[4].the_section = (Rectangle) {.x=3,.y=-15,.width=12,.height=6};  // right ear1
+probot->first_sections[5].the_section = (Rectangle) {.x=-15,.y=-15,.width=6,.height=6};  // left ear2
+probot->first_sections[6].the_section = (Rectangle) {.x=9,.y=-15,.width=6,.height=6};  // right ear2
+
+probot->first_sections[7].the_section = (Rectangle) {.x=-9,.y=15,.width=6,.height=6};   // left foot
+probot->first_sections[8].the_section = (Rectangle) {.x=3,.y=15,.width=6,.height=6};   	// right foot
+
+probot->number_second_color_sections = 0;                       
+probot->second_sections = NULL;
+}
+
+
+
+
+
+/* STAR STAR STAR STAR STAR STAR STAR team (yellow) STAR STAR STAR STAR STAR STAR STAR 
+
+    XX      XX                                XX                        XX      XX
+      XXXXXX                              XX^^^^      XXXX      XXXX    XXXX  XXXX
+    XXXXXXXXXX        XXXXXXXXXX        XXXXXXXXXX    XXXXXXXXXXXXXX    XXXXXXXXXX
+  XXXX  XX  XXXX  XXXXXX  XX  XXXXXX  XXXX  XX  XXXX    XX  XX  XX    XXXX  XX  XXXX
+    XXXXXXXXXX      XXXXXXXXXXXXXX      XXXXXXXXXX      XXXXXXXXXX      XXXXXXXXXX
+    XXXXXXXXXXXXXX    XX222222XX        XXXXXXXXXX      XXXXXXXXXX      XXXXXXXXXX
+                      XX22  22XX          XX  XX          XX  XX          XX  XX
+
+
+   STAR STAR STAR STAR STAR STAR STAR team (yellow) STAR STAR STAR STAR STAR STAR STAR */
+void init_larry_harvey_star(larry_harvey_basketball_team *pteam) {
+init_larry_harvey_star_point_guard(pteam->players+0);
+init_larry_harvey_star_shooting_guard(pteam->players+1);
+init_larry_harvey_star_center(pteam->players+2);
+init_larry_harvey_star_small_forward(pteam->players+3);
+init_larry_harvey_star_power_forward(pteam->players+4);
+}
+
+
+
 
 
 
@@ -417,9 +755,9 @@ larry_harvey_robot_league *league=malloc(sizeof(larry_harvey_robot_league));
 
 init_larry_harvey_evil(league->teams+0);
 init_larry_harvey_love(league->teams+1);
-
 init_larry_harvey_burner(league->teams+2);
 init_larry_harvey_star(league->teams+3);
+
 init_larry_harvey_screw(league->teams+4);
 init_larry_harvey_pasta(league->teams+5);
 init_larry_harvey_hope(league->teams+6);
