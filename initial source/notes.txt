@@ -1,1 +1,68 @@
+Started out with in interview between Hib Engler and Hipolito Medrano 4/30
+
+Question:
+All of silent radiance is open source.   If I add your icons, do you want them to be open source as well, or proprietary?
+I can do it either way.
+
+Also, do you have higher res versions than what I got?
+
+Also, I was going to leave everything blocky except the eyes - and make the eyes round.
+
+Also, what is the thickness of the robots (3d)?
+
+
+
+
+
+
+
+hIp:
+Open source is fine, I don't have a higher resolution, just got a computer and am working on this. The thickness is all up to the individual, I made them 2D, with the idea of giving someone a starting point and then let the person go with it. If you make the pixel square into a cube, that's how thick I'd go, but feel free to customize and I've had these characters / icons with me since around the early 2000s. Always adding and changing as the year went on with Burning Man. Hib, these icons are ready to be ADOPTED by others. Does that make sense?
+
+
+
+
+
+Yeah,   The blockiness gives it character. If done with triangles and lines,  it would look too different.
+     Here is a rough example of what I mean for the round eyes and square edges.
+     
+     
+Looks great.
+
+     
+Do you have these examples with the lines through them?  That will help me graph them out.
+
+	       
+This could become like the GD dancing bears.
+
+			       
+
+									       
+I used MS paint for the majority of the images, this came from when I started using a pixel app. The lines just were a mistake I couldn't fix, but kept it anyway. On MS PAINT there's an erase tool that will give you a perfect square to make a consistent pixel shape. I love the dancing bears.
+
+																											       
+																																																						       
+
+But I like the edges you've made it gives it character.
+
+
+
+
+What do they look like in the back?  Just square, or a but, or a tail, or two?
+Do they move up down left right like space invaders, or do they turn to move like Galaga?  Do they have weapons or projectiles?
+Hand drawn edges - I can do it. Takes longer.  I was using a different program called the gimp - that doesn't have squaring off.
+
+Lets assume square.  Do any have moving bits like rotating ears, flaps? Do they eat, hug, ingest skittles that they shoot out causing them to act differntly?
+
+Should they be called robot hater invaders or Larry Harvey Robot hader invaders?
+
+
+The basic body is  4 x 5 pixel grid with appendages, that back is basically the same only without the eyes. The idea was simply to BIRTH the basic invader and let it's environment and those around trying to dictate what LARRY'S POSSE does from here on out.
+
+In essence each invader is a product of its environment, imagine TAMAGOCHI egg from the 90's, it's a symbiotic relationship with a bot/being.
+
+
+If you have a suggestion for a name I'm all ears, LARRY HARVEY HAS A POSEE, has always been a favorite. It shows loyalty and having someone's back when need be.
+
+
 
