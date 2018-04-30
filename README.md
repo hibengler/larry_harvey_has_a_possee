@@ -10,3 +10,17 @@ Due to the death of Larry Harvey, founder of Burning Man, Hipolity Medrano decid
 For Hib, Burning Man and Larry Harvey are a big part of who he is, as well.So the idea is to make little icons with Raylib - these will run on their own. Also they will be incorporated into a visualizer in silent radiance.  
 
 We will start with initial images and at the end have a nice library and raylib app.
+
+Prerequisites - raylib
+
+Deliverables - example_possee_game - a stand alone game showing the icons being drawn in 2d.
+
+To build
+cd src
+make
+
+to run: (linuxland)
+./example_possee_game
+
+
+Should work on emscriptem, android, etc.
