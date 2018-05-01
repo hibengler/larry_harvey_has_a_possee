@@ -19,7 +19,7 @@ league = new_larry_harvey_robot_league();
 
 startx=0.f;
 starty=0.f;
-offsetx = 1.f;
+offsetx = 0.f;
 offsety = 1.f;
 
 // 
@@ -37,7 +37,7 @@ for (int i=0;i<2;i++) {
 
 void UpdateGame(void) {
 /*
-for (int i=0;i<2;i++) {
+for (int i=0;i<5;i++) {
   larry_harvey_basketball_team *team = league->teams+i;
   for (int j=0;j<5;j++) {
     larry_harvey_robot *probot = team->players+j;
@@ -151,7 +151,7 @@ BeginDrawing();
 
 ClearBackground(BLACK);
 
-for (int i=0;i<4;i++) {
+for (int i=0;i<8;i++) {
   larry_harvey_basketball_team *team = league->teams+i;
   for (int j=0;j<5;j++) {
     larry_harvey_robot *probot = team->players+j;
@@ -190,7 +190,7 @@ int main(void)
 #if defined(PLATFORM_ANDROID)
     InitWindow(1024, 768, app);
 #else
-    InitWindow(1024, 768, "sample game: Robot hate on Black Rock City, NV");
+    InitWindow(1024, 1600, "sample game: Robot hate on Black Rock City, NV");
 #endif
 
 InitGame();
