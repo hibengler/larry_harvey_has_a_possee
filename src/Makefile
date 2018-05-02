@@ -229,7 +229,7 @@ endif
 
 # define all object files required
 SAMPLES = \
-    example_possee_game
+    example_possee_game example_possee_3d
     
 # typing 'make' will invoke the default target entry
 all: $(SAMPLES)
