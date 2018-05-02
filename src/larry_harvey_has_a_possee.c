@@ -1534,41 +1534,45 @@ void free_larry_harvey_robot_league(larry_harvey_robot_league *league) {
 
 
 
-void draw_larry_harvey_robot_2d(larry_harvey_robot *probot) {
+void draw_larry_harvey_robot_2d(larry_harvey_robot *probot,Vector2 translate,Vector2 scale) {
 const float factor= 1.f/56.f;
 
 int i;
 for (i=0;i<probot->number_first_color_sections;i++) {
   Rectangle r= probot->first_sections[i].the_section;
-  
-  DrawRectangleV((Vector2){.x=((float)r.x)*factor,.y=((float)r.y)*factor},
-    (Vector2){.x=((float)r.width)*factor,.y=((float)r.height)*factor},
-    probot->usual_first_color);
+  Vector2 positioned={.x = ((float)r.x)*scale.x*factor + translate.x,
+                      .y = ((float)r.y)*scale.y*factor + translate.y};
+  Vector2 geometry={.x=((float)r.width)*scale.x*factor,
+                .y=((float)r.height)*scale.y*factor};
+  DrawRectangleV(positioned,geometry,probot->usual_first_color);
   }
 
 for (i=0;i<probot->number_second_color_sections;i++) {
   Rectangle r= probot->second_sections[i].the_section;
-  
-  DrawRectangleV((Vector2){.x=((float)r.x)*factor,.y=((float)r.y)*factor},
-    (Vector2){.x=((float)r.width)*factor,.y=((float)r.height)*factor},
-    probot->usual_first_color);
+  Vector2 positioned={.x = ((float)r.x)*scale.x*factor + translate.x,
+                      .y = ((float)r.y)*scale.y*factor + translate.y};
+  Vector2 geometry={.x=((float)r.width)*scale.x*factor,
+                .y=((float)r.height)*scale.y*factor};
+  DrawRectangleV(positioned,geometry,probot->usual_first_color);
   }
 
 
 for (i=0;i<probot->number_third_color_sections;i++) {
   Rectangle r= probot->third_sections[i].the_section;
-  DrawRectangleV((Vector2){.x=((float)r.x)*factor,.y=((float)r.y)*factor},
-    (Vector2){.x=((float)r.width)*factor,.y=((float)r.height)*factor},
-    probot->usual_first_color);
+  Vector2 positioned={.x = ((float)r.x)*scale.x*factor + translate.x,
+                      .y = ((float)r.y)*scale.y*factor + translate.y};
+  Vector2 geometry={.x=((float)r.width)*scale.x*factor,
+                .y=((float)r.height)*scale.y*factor};
+  DrawRectangleV(positioned,geometry,probot->usual_first_color);
   }
 
 {
-  DrawCircleV((Vector2){.x=7.f * factor, .y= 0.f * factor},5.5f * factor,BLACK);
-  DrawCircleV((Vector2){.x=-7.f * factor, .y= 0.f * factor},5.5f * factor,BLACK);
-  DrawCircleV((Vector2){.x=5.f * factor, .y= -2.f * factor},2.5f * factor,WHITE);
-  DrawCircleV((Vector2){.x=-5.f * factor, .y= -2.f * factor},2.5f * factor,WHITE);
-  DrawCircleV((Vector2){.x=9.f * factor, .y= 2.f * factor},1.333f * factor,WHITE);
-  DrawCircleV((Vector2){.x=-9.f * factor, .y= 2.f * factor},1.333f * factor,WHITE);
+  DrawCircleV((Vector2){.x=7.f * scale.x * factor+translate.x,  .y= 0.f * scale.y* factor+translate.y}, 5.5f * scale.x*factor,BLACK);
+  DrawCircleV((Vector2){.x=-7.f* scale.x * factor+translate.x,  .y= 0.f * scale.y* factor+translate.y}, 5.5f * scale.x*factor,BLACK);
+  DrawCircleV((Vector2){.x=5.f * scale.x * factor+ translate.x, .y= -2.f * scale.y * factor+translate.y},2.5f *scale.x * factor,WHITE);
+  DrawCircleV((Vector2){.x=-5.f * scale.x *factor+translate.x,  .y= -2.f * scale.y * factor+translate.y},2.5f *scale.x * factor,WHITE);
+  DrawCircleV((Vector2){.x=9.f  * scale.x * factor+translate.x, .y= 2.f * scale.y * factor+translate.y},1.333f *scale.x * factor,WHITE);
+  DrawCircleV((Vector2){.x=-9.f * scale.x * factor+translate.x, .y= 2.f * scale.y * factor+translate.y},1.333f *scale.x * factor,WHITE);
   }
 
 }
@@ -1577,7 +1581,7 @@ for (i=0;i<probot->number_third_color_sections;i++) {
 
 
 
-void draw_larry_harvey_robot_3d(larry_harvey_robot *probot) {
+void draw_larry_harvey_robot_3d(larry_harvey_robot *probot,Vector3 translate,Vector3 scale) {
 const float factor= 1.f/56.f;
 
 int i;

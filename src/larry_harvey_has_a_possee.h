@@ -32,8 +32,8 @@ typedef struct larry_harvey_robot_league {
 extern larry_harvey_robot_league * new_larry_harvey_robot_league();
 extern void free_larry_harvey_robot_league();
 
-void draw_larry_harvey_robot_2d(larry_harvey_robot *probot);
-void draw_larry_harvey_robot_3d(larry_harvey_robot *probot);
+void draw_larry_harvey_robot_2d(larry_harvey_robot *probot,Vector2 translate,Vector2 scale);
+void draw_larry_harvey_robot_3d(larry_harvey_robot *probot,Vector3 translate,Vector3 scale);
 
   
 #endif

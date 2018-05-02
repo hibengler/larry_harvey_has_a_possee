@@ -19,7 +19,7 @@ league = new_larry_harvey_robot_league();
 
 startx=0.f;
 starty=0.f;
-offsetx = 0.f;
+offsetx = 1.f;
 offsety = 1.f;
 
 // 
@@ -65,82 +65,14 @@ else {
 
 
 static void draw_robot_2d(larry_harvey_robot *probot,int y_level,int x_level) {
+float x_scale = 3.f * 56.f;
+float y_scale = 3.f * 56.f;
 float y_offset = 30.f + 56.f * y_level + starty;
 float x_offset = 30.f + 56.f * x_level + startx;
-float x_scale = 3.f;
-float y_scale = 3.f;
-
-int i;
-for (i=0;i<probot->number_first_color_sections;i++) {
-  Rectangle rme= probot->first_sections[i].the_section;
-  Rectangle r;
-  r.x =    ((float)(rme.x) + x_offset) * x_scale;
-  r.y =    ((float)(rme.y) + y_offset) * y_scale;
-  r.width = ((float)rme.width) * x_scale;
-  r.height = ((float)rme.height) * y_scale;
-  DrawRectangleRec(r,probot->usual_first_color);
-  }
-
-
-for (i=0;i<probot->number_second_color_sections;i++) {
-  Rectangle rme= probot->second_sections[i].the_section;
-  Rectangle r;
-  r.x =    ((float)(rme.x) + x_offset) * x_scale;
-  r.y =    ((float)(rme.y) + y_offset) * y_scale;
-  r.width = ((float)rme.width) * x_scale;
-  r.height = ((float)rme.height) * y_scale;
-  DrawRectangleRec(r,probot->usual_second_color);
-  }
-
-
-for (i=0;i<probot->number_third_color_sections;i++) {
-  Rectangle rme= probot->third_sections[i].the_section;
-  Rectangle r;
-  r.x =    ((float)(rme.x) + x_offset) * x_scale;
-  r.y =    ((float)(rme.y) + y_offset) * y_scale;
-  r.width = ((float)rme.width) * x_scale;
-  r.height = ((float)rme.height) * y_scale;
-  DrawRectangleRec(r,probot->usual_third_color);
-  }
-
-{
-  Rectangle rme = {.x=7,.y=0,.width=6,.height=6};
-  Rectangle r;
-  r.x =    ((float)(rme.x) + x_offset) * x_scale;
-  r.y =    ((float)(rme.y) + y_offset) * y_scale;
-  r.width = ((float)rme.width) * x_scale;
-  r.height = ((float)rme.height) * y_scale;
-  DrawCircle(r.x,r.y,(5.5f * y_scale),BLACK);
-  r.x =    ((float)(-7) + x_offset) * x_scale;
-  DrawCircle(r.x,r.y,(5.5f * y_scale),BLACK);  
-  }
-
-{
-  Rectangle rme = {.x=5,.y=-2,.width=3,.height=3};
-  Rectangle r;
-  r.x =    ((float)(rme.x) + x_offset) * x_scale;
-  r.y =    ((float)(rme.y) + y_offset) * y_scale;
-  r.width = ((float)rme.width) * x_scale;
-  r.height = ((float)rme.height) * y_scale;
-  DrawCircle(r.x,r.y,(2.5f * y_scale),WHITE);
-  r.x =    ((float)(-5) + x_offset) * x_scale;
-  DrawCircle(r.x,r.y,(2.5f * y_scale),WHITE);  
-  }
-
-{
-  Rectangle rme = {.x=9,.y=2,.width=3,.height=3};
-  Rectangle r;
-  r.x =    ((float)(rme.x) + x_offset) * x_scale;
-  r.y =    ((float)(rme.y) + y_offset) * y_scale;
-  r.width = ((float)rme.width) * x_scale;
-  r.height = ((float)rme.height) * y_scale;
-  DrawCircle(r.x,r.y,(1.333f * y_scale),WHITE);
-  r.x =    ((float)(-9) + x_offset) * x_scale;
-  DrawCircle(r.x,r.y,(1.333f * y_scale),WHITE);  
-  }
-
-
+draw_larry_harvey_robot_2d(probot,(Vector2){.x=x_offset*3.,.y=y_offset*3.},
+                                   (Vector2){.x=x_scale,.y=y_scale});
 }
+
 
 
 
