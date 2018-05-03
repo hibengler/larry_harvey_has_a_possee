@@ -505,15 +505,15 @@ probot->first_sections[7].the_section = (Rectangle) {.x=3,.y=9,.width=12,.height
 */	 
 void init_larry_harvey_burner_power_forward(larry_harvey_robot *probot) {
 init_larry_harvey_burner_standard(probot);
-probot->number_first_color_sections = 9;
+probot->number_first_color_sections = 7;
 probot->first_sections = malloc(sizeof(larry_harvey_rectangle_section)*probot->number_first_color_sections);
 probot->first_sections[0].the_section = (Rectangle) {.x=-15,.y=-9,.width=30,.height=18};// each block is a 54x54 square with 6 pixels not used.
 probot->first_sections[1].the_section = (Rectangle) {.x=-9,.y=-15,.width=18,.height=6};  // nub 1
 probot->first_sections[2].the_section = (Rectangle) {.x=-3,.y=-21,.width=6,.height=6};  // nub 2
-probot->first_sections[5].the_section = (Rectangle) {.x=-9,.y=9,.width=6,.height=6};   // left foot
-probot->first_sections[6].the_section = (Rectangle) {.x=3,.y=9,.width=6,.height=6};   	// right foot
-probot->first_sections[7].the_section = (Rectangle) {.x=-15,.y=15,.width=6,.height=6};  // left pointantennae
-probot->first_sections[8].the_section = (Rectangle) {.x=9,.y=15,.width=6,.height=6};   	// right pointantennae
+probot->first_sections[3].the_section = (Rectangle) {.x=-9,.y=9,.width=6,.height=6};   // left foot
+probot->first_sections[4].the_section = (Rectangle) {.x=3,.y=9,.width=6,.height=6};   	// right foot
+probot->first_sections[5].the_section = (Rectangle) {.x=-15,.y=15,.width=6,.height=6};  // left pointantennae
+probot->first_sections[6].the_section = (Rectangle) {.x=9,.y=15,.width=6,.height=6};   	// right pointantennae
 
 }
 
@@ -1578,16 +1578,33 @@ for (i=0;i<probot->number_third_color_sections;i++) {
 
 }
 
+#define RST_LARRY(aa,factor,translate,scale,sinangle,cosangle) (Vector3){ \
+   .x=(aa.x*cosangle+aa.y*sinangle)*scale.x*factor + translate.x, \
+   .y=(aa.y*cosangle-aa.x*sinangle)*scale.y*factor + translate.y, \
+   .z=(aa.z*scale.z*factor + translate.z)}
 
+#define SRT_LARRY(aa,factor,translate,scale,sinangle,cosangle) (Vector3){ \
+   .x=(aa.x*cosangle*scale.x+aa.y*sinangle*scale.y)*factor + translate.x, \
+   .y=(aa.y*cosangle*scale.y-aa.x*sinangle*scale.x)*factor + translate.y, \
+   .z=(aa.z*scale.z*factor + translate.z)}
 
+#define RT_LARRY(aa,translate,sinangle,cosangle) (Vector3){ \
+   .x=(aa.x*cosangle+aa.y*sinangle) + translate.x, \
+   .y=(aa.y*cosangle-aa.x*sinangle) + translate.y, \
+   .z=(aa.z + translate.z)}
+
+#define TR_LARRY(aa,translate,sinangle,cosangle) (Vector3){ \
+   .x=((aa.x+translate.x)*cosangle+(aa.y+translate.y)*sinangle), \
+   .y=((aa.y+translate.y)*cosangle-(aa.x+translate.x)*sinangle), \
+   .z=(aa.z + translate.z)}
 
 // Draw a circle in 3D world space
 void DrawFilledCircle3D(Vector3 center, float radius, Vector3 rotationAxis, float rotationAngle, Color color)
 {
-    rlPushMatrix();
+   rlPushMatrix();
         rlTranslatef(center.x, center.y, center.z);
         rlRotatef(rotationAngle, rotationAxis.x, rotationAxis.y, rotationAxis.z);
-
+ 
         rlBegin(RL_TRIANGLES);
             for (int i = 0; i < 360; i += 20)
             {
@@ -1598,13 +1615,59 @@ void DrawFilledCircle3D(Vector3 center, float radius, Vector3 rotationAxis, floa
                 rlVertex3f(0.f,0.f,0.f);
                 rlColor4ub(color.r, color.g, color.b, color.a);
                 rlVertex3f(sinf(DEG2RAD*(i + 20))*radius, cosf(DEG2RAD*(i + 20))*radius, 0.0f);
+
             }
         rlEnd();
     rlPopMatrix();
 }
 
 
+// Draw a quad in 3d
+void DrawRotatedRectangleV(Vector3 position, Vector3 size,Vector3 translate, float sinangle,float cosangle, Color color)
+{
+    rlPushMatrix();
+//        rlTranslatef(translate.x, translate.y, translate.z);
 
+    size.x = -0.5*size.x;    size.y = -0.5*size.y; size.z = 0.5*size.z;    
+
+
+        rlBegin(RL_TRIANGLES);
+		Vector3 p0;
+		Vector3 p1;
+		Vector3 p2;
+		Vector3 p3;
+		Vector3 t3 = {0.f,0.f,0.f};
+		p0 = (Vector3){position.x+size.x,position.y+size.y,position.z+size.z};
+		p0 = RT_LARRY(p0,translate,sinangle,cosangle);
+		size.x = -size.x;
+		p1 = (Vector3){position.x+size.x,position.y+size.y,position.z+size.z};
+		p1 = RT_LARRY(p1,translate,sinangle,cosangle);
+                size.y = -size.y;
+		p3 = (Vector3){position.x+size.x,position.y+size.y,position.z+size.z};
+		p3 = RT_LARRY(p3,translate,sinangle,cosangle);
+                size.x = -size.x;
+		p2 = (Vector3){position.x+size.x,position.y+size.y,position.z+size.z};
+		p2 = RT_LARRY(p2,translate,sinangle,cosangle);
+
+ 
+                rlColor4ub(color.r, color.g, color.b, color.a);
+                rlVertex3f(p0.x,p0.y,p0.z);
+                rlColor4ub(color.r, color.g, color.b, color.a);
+                rlVertex3f(p1.x,p1.y,p1.z);
+                rlColor4ub(color.r, color.g, color.b, color.a);
+                rlVertex3f(p3.x,p3.y,p3.z);
+
+
+                rlColor4ub(color.r, color.g, color.b, color.a);
+                rlVertex3f(p3.x,p3.y,p3.z);
+                rlColor4ub(color.r, color.g, color.b, color.a);
+                rlVertex3f(p2.x,p2.y,p2.z);
+                rlColor4ub(color.r, color.g, color.b, color.a);
+                rlVertex3f(p0.x,p0.y,p0.z);
+
+        rlEnd();
+    rlPopMatrix();
+}
 
 void draw_larry_harvey_robot_3d(larry_harvey_robot *probot,Vector3 translate,Vector3 scale) {
 const float factor= 1.f/56.f;
@@ -1612,7 +1675,7 @@ const float factor= 1.f/56.f;
 
 
 {
-  DrawFilledCircle3D((Vector3){.x=7.f * scale.x * factor+translate.x,  
+  DrawFilledCircle3D((Vector3){.x=7.f * scale.x * factor+translate.x,
     .y= 0.f * scale.y* factor+translate.y,
     .z=0.2*scale.z*factor + translate.z}, 5.5f * scale.x*factor,
     (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,BLACK);
@@ -1624,13 +1687,62 @@ const float factor= 1.f/56.f;
     (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
   DrawFilledCircle3D((Vector3){.x=9.f  * scale.x * factor+translate.x, .y= -2.f * scale.y * factor+translate.y,.z=0.4*scale.z*factor+ translate.z},1.333f *scale.x * factor,
     (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
-  DrawFilledCircle3D((Vector3){.x=-9.f * scale.x * factor+translate.x, .y= -2.f * scale.y * factor+translate.y,.z=-0.4*scale.z*factor+ translate.z},1.333f *scale.x * factor,
+  DrawFilledCircle3D((Vector3){.x=-9.f * scale.x * factor+translate.x, .y= -2.f * scale.y * factor+translate.y,.z=0.4*scale.z*factor+ translate.z},1.333f *scale.x * factor,
     (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
 
   }
 
 int i;
 for (i=0;i<probot->number_first_color_sections;i++) {
+  Rectangle r= probot->first_sections[i].the_section;
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
+                      .z = ((float)0.f)*scale.z*factor + translate.z};
+  Vector3 geometry={.x=((float)r.width)*scale.x*factor,
+                .y=((float)r.height)*scale.y*factor,
+                .z=((float)0.0)*scale.z*factor};
+  DrawCubeV(positioned,geometry,probot->usual_first_color);
+  }
+
+for (i=0;i<probot->number_second_color_sections;i++) {
+  Rectangle r= probot->second_sections[i].the_section; 
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
+                      .z = ((float)0.f)*scale.z*factor + translate.z};
+  Vector3 geometry={.x=((float)r.width)*scale.x*factor,
+                .y=((float)r.height)*scale.y*factor,
+                .z=((float)0.)*scale.z*factor};
+  DrawCubeV(positioned,geometry,probot->usual_second_color);
+  }
+
+
+for (i=0;i<probot->number_third_color_sections;i++) {
+  Rectangle r= probot->third_sections[i].the_section;
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
+                      .z = ((float)0.f)*scale.z*factor + translate.z};
+  Vector3 geometry={.x=((float)r.width)*scale.x*factor,
+                .y=((float)r.height)*scale.y*factor,
+                .z=((float)0.)*scale.z*factor};
+  DrawCubeV(positioned,geometry,probot->usual_third_color);
+  }
+
+}  
+
+
+
+
+
+
+
+
+
+void draw_larry_harvey_robot_container_3d(larry_harvey_robot *probot,Vector3 translate,Vector3 scale) {
+const float factor= 1.f/56.f;
+
+int i;
+i=0;
+{
   Rectangle r= probot->first_sections[i].the_section;
   Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
                       .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
@@ -1641,32 +1753,102 @@ for (i=0;i<probot->number_first_color_sections;i++) {
   DrawCubeV(positioned,geometry,probot->usual_first_color);
   }
 
-for (i=0;i<probot->number_second_color_sections;i++) {
-  Rectangle r= probot->second_sections[i].the_section;
-  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
-                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
-		      .z = ((float)0.f)*scale.z*factor + translate.z};
+}
+
+
+void draw_larry_harvey_robot_container_3d_rotate(larry_harvey_robot *probot,Vector3 translate,Vector3 scale,float sinangle,float cosangle) {
+const float factor= 1.f/56.f;
+
+int i;
+i=0;
+{
+
+  Rectangle r= probot->first_sections[i].the_section;
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor,
+		      .z = ((float)0.f)*scale.z*factor};
   Vector3 geometry={.x=((float)r.width)*scale.x*factor,
                 .y=((float)r.height)*scale.y*factor,
-		.z=((float)0.)*scale.z*factor};  
-  DrawCubeV(positioned,geometry,probot->usual_second_color);
+		.z=((float)0.0)*scale.z*factor};  
+  DrawRotatedRectangleV(positioned,geometry,translate,sinangle,cosangle,probot->usual_first_color);
+  }
+
+}
+
+   
+
+void draw_larry_harvey_robot_3d_rotate(larry_harvey_robot *probot,Vector3 translate,Vector3 scale,float sinangle,float cosangle) {
+const float factor= 1.f/56.f;
+
+
+{
+  const Vector3 c1 = (Vector3){.x=7.f,.y=0.f,.z=0.2};
+  DrawFilledCircle3D(SRT_LARRY(c1,factor,translate,scale,sinangle,cosangle),
+    5.5f * scale.x*factor,
+    (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,BLACK);
+  const Vector3 c2 = (Vector3){.x=-7.f,.y=0.f,.z=0.2};
+  DrawFilledCircle3D(SRT_LARRY(c2,factor,translate,scale,sinangle,cosangle),
+    5.5f * scale.x*factor,
+    (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,BLACK);
+  const Vector3 c3 = (Vector3){.x=5.f,.y=2.f,.z=0.4f};
+  DrawFilledCircle3D(SRT_LARRY(c3,factor,translate,scale,sinangle,cosangle),
+    2.5f * scale.x*factor,
+    (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
+  const Vector3 c4 = (Vector3){.x=-5.f,.y=2.f,.z=0.4f};
+  DrawFilledCircle3D(SRT_LARRY(c4,factor,translate,scale,sinangle,cosangle),
+    2.5f * scale.x*factor,
+    (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
+  const Vector3 c5 = (Vector3){.x=9.f,.y=2.f,.z=0.4f};
+  DrawFilledCircle3D(SRT_LARRY(c5,factor,translate,scale,sinangle,cosangle),
+    1.333f * scale.x*factor,
+    (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
+  const Vector3 c6 = (Vector3){.x=-9.f,.y=2.f,.z=0.4f};
+  DrawFilledCircle3D(SRT_LARRY(c6,factor,translate,scale,sinangle,cosangle),
+    1.333f * scale.x*factor,
+    (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
+  }
+
+
+  
+int i;
+for (i=0;i<probot->number_first_color_sections;i++) {
+
+  Rectangle r= probot->first_sections[i].the_section;
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor,
+		      .z = ((float)0.f)*scale.z*factor};
+  Vector3 geometry={.x=((float)r.width)*scale.x*factor,
+                .y=((float)r.height)*scale.y*factor,
+		.z=((float)0.0)*scale.z*factor};  
+  DrawRotatedRectangleV(positioned,geometry,translate,sinangle,cosangle,probot->usual_first_color);
+  }
+
+for (i=0;i<probot->number_second_color_sections;i++) {
+  Rectangle r= probot->second_sections[i].the_section;
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor,
+		      .z = ((float)0.f)*scale.z*factor};
+  Vector3 geometry={.x=((float)r.width)*scale.x*factor,
+                .y=((float)r.height)*scale.y*factor,
+		.z=((float)0.0)*scale.z*factor};  
+  DrawRotatedRectangleV(positioned,geometry,translate,sinangle,cosangle,probot->usual_second_color);
   }
 
 
 for (i=0;i<probot->number_third_color_sections;i++) {
   Rectangle r= probot->third_sections[i].the_section;
-  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
-                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
-		      .z = ((float)0.f)*scale.z*factor + translate.z};
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor,
+		      .z = ((float)0.f)*scale.z*factor};
   Vector3 geometry={.x=((float)r.width)*scale.x*factor,
                 .y=((float)r.height)*scale.y*factor,
-		.z=((float)0.)*scale.z*factor};  
-  DrawCubeV(positioned,geometry,probot->usual_third_color);
+		.z=((float)0.0)*scale.z*factor};  
+  DrawRotatedRectangleV(positioned,geometry,translate,sinangle,cosangle,probot->usual_third_color);
   }
 
 }
 
-
 /* End of file larry_harvey_has_a_possee */
 
   
+

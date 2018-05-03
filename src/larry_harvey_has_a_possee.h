@@ -34,6 +34,14 @@ extern void free_larry_harvey_robot_league();
 
 void draw_larry_harvey_robot_2d(larry_harvey_robot *probot,Vector2 translate,Vector2 scale);
 void draw_larry_harvey_robot_3d(larry_harvey_robot *probot,Vector3 translate,Vector3 scale);
+void draw_larry_harvey_robot_container_3d(larry_harvey_robot *probot,Vector3 translate,Vector3 scale);
+/* the container is a box that will fit the robot and had the color of the robot.
+   It can also used to draw the robot from far away */
+
+
+/*sometimes you want to rotate */
+void draw_larry_harvey_robot_3d_rotate(larry_harvey_robot *probot,Vector3 translate,Vector3 scale,float sinangle,float cosangle);
+void draw_larry_harvey_robot_container_3d_rotate(larry_harvey_robot *probot,Vector3 translate,Vector3 scale,float sinangle,float cosangle);
 
   
 #endif

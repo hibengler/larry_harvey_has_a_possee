@@ -8,7 +8,7 @@ float startx;
 float starty;
 float offsetx;
 float offsety;
-
+float rotate;
 larry_harvey_robot_league *league;
 
 
@@ -21,7 +21,13 @@ float x_scale = 1.f;
 float y_scale = 1.f;
 float y_offset = 0.f  + (12-y_level + starty);
 float x_offset = 0.f  +(x_level + startx/10.);
-draw_larry_harvey_robot_3d(probot,(Vector3){.x=-4.+x_offset,.y=-3+y_offset,.z=3.f},
+float sinangle;
+float cosangle;
+sinangle = sinf(rotate);
+cosangle = cosf(rotate);
+draw_larry_harvey_robot_3d_rotate(probot,(Vector3){.x=-4.+x_offset,.y=-3+y_offset,.z=3.f},
+                                   (Vector3){.x=x_scale,.y=y_scale,.z=x_scale},sinangle,cosangle);
+draw_larry_harvey_robot_3d(probot,(Vector3){.x=-4.+x_offset,.y=-3+y_offset,.z=2.f},
                                    (Vector3){.x=x_scale,.y=y_scale,.z=x_scale});
 }
 
@@ -39,7 +45,7 @@ int main()
     starty=0.f;
     offsetx = 0.1f;
     offsety = 1.f;
-      
+    rotate=0.f;
       
 
     InitWindow(screenWidth, screenHeight, "Larry Harvey Hater robots 3d");
@@ -75,7 +81,7 @@ else {
     offsetx = -offsetx;
     }
   }
-    
+rotate = rotate + 0.01;    
 
         // Draw
         //----------------------------------------------------------------------------------
