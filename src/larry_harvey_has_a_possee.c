@@ -1798,11 +1798,11 @@ const float factor= 1.f/56.f;
   DrawFilledCircle3D(SRT_LARRY(c4,factor,translate,scale,sinangle,cosangle),
     2.5f * scale.x*factor,
     (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
-  const Vector3 c5 = (Vector3){.x=9.f,.y=2.f,.z=0.4f};
+  const Vector3 c5 = (Vector3){.x=9.f,.y=-2.f,.z=0.4f};
   DrawFilledCircle3D(SRT_LARRY(c5,factor,translate,scale,sinangle,cosangle),
     1.333f * scale.x*factor,
     (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
-  const Vector3 c6 = (Vector3){.x=-9.f,.y=2.f,.z=0.4f};
+  const Vector3 c6 = (Vector3){.x=-9.f,.y=-2.f,.z=0.4f};
   DrawFilledCircle3D(SRT_LARRY(c6,factor,translate,scale,sinangle,cosangle),
     1.333f * scale.x*factor,
     (Vector3){.x=0.f,.y=0.f,.z=1.f},0.f,WHITE);
