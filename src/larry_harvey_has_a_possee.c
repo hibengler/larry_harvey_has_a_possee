@@ -1695,36 +1695,37 @@ const float factor= 1.f/56.f;
 int i;
 for (i=0;i<probot->number_first_color_sections;i++) {
   Rectangle r= probot->first_sections[i].the_section;
-  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
-                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
-                      .z = ((float)0.f)*scale.z*factor + translate.z};
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)r.width)*0.5)*scale.x*factor,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor,
+                      .z = ((float)0.f)*scale.z*factor};
   Vector3 geometry={.x=((float)r.width)*scale.x*factor,
                 .y=((float)r.height)*scale.y*factor,
                 .z=((float)0.0)*scale.z*factor};
-  DrawCubeV(positioned,geometry,probot->usual_first_color);
+  DrawRotatedRectangleV(positioned,geometry,translate,0.f,1.f,probot->usual_first_color);
   }
 
 for (i=0;i<probot->number_second_color_sections;i++) {
   Rectangle r= probot->second_sections[i].the_section; 
-  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
-                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
-                      .z = ((float)0.f)*scale.z*factor + translate.z};
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor,
+                      .z = ((float)0.f)*scale.z*factor};
   Vector3 geometry={.x=((float)r.width)*scale.x*factor,
                 .y=((float)r.height)*scale.y*factor,
                 .z=((float)0.)*scale.z*factor};
-  DrawCubeV(positioned,geometry,probot->usual_second_color);
+  DrawRotatedRectangleV(positioned,geometry,translate,0.f,1.f,probot->usual_second_color);
+//  DrawCubeV(positioned,geometry,probot->usual_second_color);
   }
 
 
 for (i=0;i<probot->number_third_color_sections;i++) {
   Rectangle r= probot->third_sections[i].the_section;
-  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor + translate.x,
-                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor + translate.y,
-                      .z = ((float)0.f)*scale.z*factor + translate.z};
+  Vector3 positioned={.x = ( ((float)r.x) + ((float)(r.width))*0.5)*scale.x*factor,
+                      .y = ( ((float)-r.y) -((float)r.height)*0.5)*scale.y*factor,
+                      .z = ((float)0.f)*scale.z*factor};
   Vector3 geometry={.x=((float)r.width)*scale.x*factor,
                 .y=((float)r.height)*scale.y*factor,
                 .z=((float)0.)*scale.z*factor};
-  DrawCubeV(positioned,geometry,probot->usual_third_color);
+  DrawRotatedRectangleV(positioned,geometry,translate,0.f,1.f,probot->usual_third_color);
   }
 
 }  
