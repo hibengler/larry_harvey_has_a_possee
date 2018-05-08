@@ -43,5 +43,9 @@ void draw_larry_harvey_robot_container_3d(larry_harvey_robot *probot,Vector3 tra
 void draw_larry_harvey_robot_3d_rotate(larry_harvey_robot *probot,Vector3 translate,Vector3 scale,float sinangle,float cosangle);
 void draw_larry_harvey_robot_container_3d_rotate(larry_harvey_robot *probot,Vector3 translate,Vector3 scale,float sinangle,float cosangle);
 
+
+/* sometimes you want to sparkle */
+void draw_larry_harvey_robot_container_3d_sparkle(larry_harvey_robot *probot,Vector3 translate,Vector3 scale);
+
   
 #endif
